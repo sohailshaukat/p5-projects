@@ -1,44 +1,66 @@
 var circleY = 50;
+var canvasHeight=440,canvasWidth=600;
+let extraCanvas;
+var circle1 = {
+  x : 400,
+  y: 100,
+  diameter : 80,
+  speed : 1
+};
+
+function drawMoon(){
+  noStroke();
+  fill(255,255,255);
+  circle(circle1.x,circle1.y,circle1.diameter);
+  circle1.y += circle1.speed;
+  if(circle1.y > canvasHeight-50 && circle1.y < canvasHeight+99){
+    circle(circle1.x,circle1.y-canvasHeight,circle1.diameter);
+  }
+  else if (circle1.y >= 499) {
+    circle1.y = circle1.y-canvasHeight+circle1.speed;
+  }
+}
 
 function setup() {
   // put setup code here
-  createCanvas(600,440);
+  createCanvas(canvasWidth,canvasHeight);
   background(51);
   frameRate(100);
+  extraCanvas = createGraphics(canvasWidth,canvasHeight);
+  extraCanvas.clear();
 }
 
 function draw() {
   // put drawing code here2
+  background(51);
   if(mouseX>600 || mouseY>440){
-    background(51);
+
+    extraCanvas.clear();
   }
   //ellipseMode(CENTER);
   rectMode(CENTER);
 
   // APPLE
-  noStroke();
-  fill(Math.floor((Math.random() * 255) + 1),Math.floor((Math.random() * 255) + 1),Math.floor((Math.random() * 255) + 1),20);
-  circle(mouseX, mouseY, 100);
+  image(extraCanvas, 0, 0);
+  extraCanvas.noStroke();
+  extraCanvas.fill(Math.floor((Math.random() * 255) + 1),Math.floor((Math.random() * 255) + 1),Math.floor((Math.random() * 255) + 1),20);
+  extraCanvas.circle(mouseX, mouseY, 100);
 
   // LINES
-  stroke(color(Math.floor((Math.random() * 255) + 1),Math.floor((Math.random() * 255) + 1),Math.floor((Math.random() * 255) + 1),40));
-  strokeWeight(1);
+  extraCanvas.stroke(color(Math.floor((Math.random() * 255) + 1),Math.floor((Math.random() * 255) + 1),Math.floor((Math.random() * 255) + 1),40));
+  extraCanvas.strokeWeight(1);
   var ymover = Math.floor((Math.random() * 600) +1 );
   var xmover = Math.floor((Math.random() * 600) +1 );
-  line(0,100+ymover,500,500+ymover);
-  line(100+xmover,0,600+xmover,400);
+  extraCanvas.line(0,100+ymover,500,500+ymover);
+  extraCanvas.line(100+xmover,0,600+xmover,400);
 
   // MOON
-  fill(51);
-  circle(400,circleY-1,50);
-  fill(255,255,255);
-  circle(400,circleY,50);
-  
+  extraCanvas.drawMoon();
 
   // BODY
   stroke(0);
   strokeWeight(2)
-  fill(0,0,0,155);
+  fill(0,0,0,255);
   rect(240,145,20,100);
 
   // HEAD

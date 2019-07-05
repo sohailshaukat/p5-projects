@@ -33,7 +33,7 @@ function draw() {
   circle(400,circleY-1,50);
   fill(255,255,255);
   circle(400,circleY,50);
-  circleY += 1;
+  
 
   // BODY
   stroke(0);

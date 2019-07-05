@@ -44,9 +44,9 @@ function drawGoku(){
 function setup() {
   // put setup code here
   createCanvas(board.width,board.height);
-  goku1 = loadImage('goku-1.png');
-  goku2 = loadImage('goku-2.png');
-  goku3 = loadImage('goku-3.png');
+  goku1 = loadImage('assets/goku-1.png');
+  goku2 = loadImage('assets/goku-2.png');
+  goku3 = loadImage('assets/goku-3.png');
   frameRate(100);
 }
 
